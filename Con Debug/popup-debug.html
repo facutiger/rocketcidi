@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIDI Auto-Notas DEBUG</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 500px;
+      max-height: 600px;
+      overflow-y: auto;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: #f5f7fa;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .header .version {
+      font-size: 11px;
+      opacity: 0.9;
+      background: rgba(255,255,255,0.2);
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    
+    .container {
+      padding: 20px;
+    }
+    
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Archivo */
+    .file-input-wrapper {
+      position: relative;
+      margin-bottom: 10px;
+    }
+    
+    input[type="file"] {
+      display: none;
+    }
+    
+    .file-label {
+      display: block;
+      background: #667eea;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .file-label:hover {
+      background: #5568d3;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+    }
+    
+    .file-label.success {
+      background: #48bb78;
+    }
+    
+    .file-info {
+      display: none;
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: #f0fff4;
+      border-left: 3px solid #48bb78;
+      font-size: 13px;
+      color: #2f855a;
+      border-radius: 4px;
+    }
+    
+    /* Selector materia */
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #2d3748;
+      background: white;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    select:disabled {
+      background: #f7fafc;
+      cursor: not-allowed;
+    }
+    
+    .materia-info {
+      display: none;
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: #ebf4ff;
+      border-left: 3px solid #4299e1;
+      font-size: 13px;
+      color: #2c5282;
+      border-radius: 4px;
+    }
+    
+    /* Detección pestañas */
+    .detection-info {
+      display: none;
+      padding: 10px;
+      background: #f7fafc;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .detection-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+    
+    .checkboxes {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .checkbox-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    
+    .checkbox-item label {
+      font-size: 13px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+    
+    /* Panel de DEBUG */
+    .debug-panel {
+      background: #1a202c;
+      border-radius: 6px;
+      padding: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+    }
+    
+    .debug-log {
+      padding: 4px 0;
+      border-bottom: 1px solid #2d3748;
+      color: #e2e8f0;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    
+    .debug-log:last-child {
+      border-bottom: none;
+    }
+    
+    .debug-time {
+      color: #718096;
+      flex-shrink: 0;
+    }
+    
+    .debug-emoji {
+      flex-shrink: 0;
+    }
+    
+    .debug-msg {
+      flex: 1;
+      word-break: break-word;
+    }
+    
+    .debug-log.info .debug-msg { color: #90cdf4; }
+    .debug-log.success .debug-msg { color: #68d391; }
+    .debug-log.warning .debug-msg { color: #fbd38d; }
+    .debug-log.error .debug-msg { color: #fc8181; }
+    .debug-log.debug .debug-msg { color: #b794f4; }
+    
+    /* Botones */
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    button {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .btn-primary {
+      background: #48bb78;
+      color: white;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      background: #38a169;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(72, 187, 120, 0.3);
+    }
+    
+    .btn-secondary {
+      background: #667eea;
+      color: white;
+    }
+    
+    .btn-secondary:hover:not(:disabled) {
+      background: #5568d3;
+    }
+    
+    /* Progress bar */
+    .progress-container {
+      display: none;
+      margin-top: 15px;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      width: 0%;
+      transition: width 0.3s;
+    }
+    
+    .progress-text {
+      text-align: center;
+      font-size: 12px;
+      color: #718096;
+    }
+    
+    /* Status */
+    .status {
+      display: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 15px;
+    }
+    
+    .status.info {
+      background: #ebf8ff;
+      color: #2c5282;
+      border-left: 3px solid #4299e1;
+    }
+    
+    .status.success {
+      background: #f0fff4;
+      color: #2f855a;
+      border-left: 3px solid #48bb78;
+    }
+    
+    .status.warning {
+      background: #fffaf0;
+      color: #975a16;
+      border-left: 3px solid #ed8936;
+    }
+    
+    .status.error {
+      background: #fff5f5;
+      color: #c53030;
+      border-left: 3px solid #f56565;
+    }
+    
+    /* Info box */
+    .info-box {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 12px;
+      color: #4a5568;
+      line-height: 1.5;
+    }
+    
+    .info-box strong {
+      color: #2d3748;
+      display: block;
+      margin-bottom: 6px;
+    }
+    
+    .info-box ul {
+      margin-left: 20px;
+      margin-top: 6px;
+    }
+    
+    .info-box li {
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎓 CIDI Auto-Notas</h1>
+    <span class="version">v2.0 DEBUG MODE</span>
+  </div>
+
+  <div class="container">
+    
+    <!-- 1. Cargar archivo -->
+    <div class="section">
+      <div class="section-title">📂 1. Cargar Archivo XLSX</div>
+      
+      <div class="file-input-wrapper">
+        <input type="file" id="fileInput" accept=".xlsx,.xlsm">
+        <label for="fileInput" id="fileLabel" class="file-label">
+          📁 Seleccionar archivo...
+        </label>
+      </div>
+      
+      <div id="fileInfo" class="file-info"></div>
+    </div>
+
+    <!-- 2. Seleccionar materia -->
+    <div class="section">
+      <div class="section-title">📚 2. Seleccionar Materia</div>
+      
+      <select id="selectMateria" disabled>
+        <option value="">-- Primero carga un archivo --</option>
+      </select>
+      
+      <div id="materiaInfo" class="materia-info"></div>
+    </div>
+
+    <!-- 3. Detección pestañas -->
+    <div class="section">
+      <div class="section-title">🎯 3. Pestañas Detectadas</div>
+      
+      <div id="detectionInfo" class="detection-info">
+        <div id="detectionText" class="detection-text">Detectando...</div>
+        
+        <div class="checkboxes">
+          <div class="checkbox-item">
+            <input type="checkbox" id="checkEval14" checked>
+            <label for="checkEval14">Eval 1-4</label>
+          </div>
+          
+          <div class="checkbox-item">
+            <input type="checkbox" id="checkEval58" checked>
+            <label for="checkEval58">Eval 5-8</label>
+          </div>
+          
+          <div class="checkbox-item">
+            <input type="checkbox" id="checkJIS" checked>
+            <label for="checkJIS">JIS</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Panel DEBUG -->
+    <div class="section">
+      <div class="section-title">🔍 Panel de Debug</div>
+      <div id="debugPanel" class="debug-panel">
+        <div class="debug-log info">
+          <span class="debug-time">[--:--:--]</span>
+          <span class="debug-emoji">ℹ️</span>
+          <span class="debug-msg">Esperando acciones...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="button-group">
+      <button id="processButton" class="btn-primary" disabled>
+        🚀 Procesar en CIDI
+      </button>
+      <button id="exportLogs" class="btn-secondary">
+        📥 Exportar Logs
+      </button>
+    </div>
+
+    <!-- Progress -->
+    <div id="progressContainer" class="progress-container">
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+      <div id="progressText" class="progress-text"></div>
+    </div>
+
+    <!-- Status -->
+    <div id="status" class="status"></div>
+
+    <!-- Información -->
+    <div class="info-box">
+      <strong>🐛 Modo Debug Activo</strong>
+      <ul>
+        <li>Todos los logs se muestran en el panel de debug</li>
+        <li>Abre la Consola de Chrome (F12) para más detalles</li>
+        <li>Exporta los logs para compartir con soporte</li>
+        <li>Esta versión es más verbose para diagnosticar problemas</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script src="libs/xlsx.full.min.js"></script>
+  <script src="popup-debug.js"></script>
+</body>
+</html>

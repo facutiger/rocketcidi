@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Promo Marquee</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1400px;
+      height: 560px;
+      overflow: hidden;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: #eef1f6;
+    }
+    .canvas {
+      width: 1400px;
+      height: 560px;
+      display: flex;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 55%, #5a67d8 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .canvas::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      right: -100px;
+      top: -120px;
+    }
+    .left {
+      flex: 1;
+      padding: 64px 48px 64px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .left .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+      width: fit-content;
+    }
+    .left h1 {
+      font-size: 54px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.08;
+      margin-bottom: 18px;
+      max-width: 620px;
+    }
+    .left p {
+      font-size: 20px;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.5;
+      max-width: 580px;
+      margin-bottom: 32px;
+    }
+    .bullets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .bullets span {
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .right {
+      width: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 56px 40px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .card {
+      width: 380px;
+      background: #f5f7fa;
+      border-radius: 16px;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+    .card-head {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .card-head h2 { font-size: 22px; font-weight: 600; }
+    .card-head p { font-size: 12px; opacity: 0.9; margin-top: 4px; }
+    .card-body { padding: 18px; }
+    .row {
+      background: #fff;
+      border: 1px solid #e8ecf1;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #4a5568;
+    }
+    .row strong { color: #2d3748; display: block; margin-bottom: 4px; font-size: 12px; }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="left">
+      <div class="tag">Extensión para docentes de Córdoba</div>
+      <h1>CIDI Auto-Notas</h1>
+      <p>Automatizá la carga de calificaciones en CIDI desde archivos Excel exportados por tu sistema escolar.</p>
+      <div class="bullets">
+        <span>XLSX nativo</span>
+        <span>DNI y nombre</span>
+        <span>Múltiples materias</span>
+        <span>Detección automática</span>
+        <span>100% local</span>
+      </div>
+    </div>
+    <div class="right">
+      <div class="card">
+        <div class="card-head">
+          <h2>CIDI Auto-Notas</h2>
+          <p>gestionestudiantes.cba.gov.ar</p>
+        </div>
+        <div class="card-body">
+          <div class="row"><strong>Archivo</strong>Calificaciones_6A_2026.xlsx</div>
+          <div class="row"><strong>Materia</strong>Matematica · Evaluaciones 1-4</div>
+          <button class="btn">Procesar Calificaciones</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Promo Small</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 440px;
+      height: 280px;
+      overflow: hidden;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .wrap {
+      width: 440px;
+      height: 280px;
+      padding: 28px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .wrap::before {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: -30px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    .wrap::after {
+      content: "";
+      position: absolute;
+      right: 40px;
+      bottom: -50px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+    }
+    p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.4;
+      max-width: 320px;
+      position: relative;
+      z-index: 1;
+    }
+    .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 6px;
+      position: relative;
+      z-index: 1;
+      width: fit-content;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="icon">&#128640;</div>
+    <div>
+      <h1>CIDI Auto-Notas</h1>
+      <p>Carga masiva de calificaciones desde Excel</p>
+    </div>
+    <div class="tag">Córdoba · Chrome</div>
+  </div>
+</body>
+</html>

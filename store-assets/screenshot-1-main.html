@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Screenshot 1</title>
+  <link rel="stylesheet" href="common.css">
+</head>
+<body>
+  <div class="canvas">
+    <div class="side-panel">
+      <div class="badge">Córdoba · Educación</div>
+      <h1>Cargá notas en <span>CIDI</span> desde Excel</h1>
+      <p class="lead">Automatizá la carga masiva de calificaciones en gestionestudiantes.cba.gov.ar. Un archivo XLSX, una materia, un clic.</p>
+      <ul class="features">
+        <li>Lee archivos XLSX sin convertir a CSV</li>
+        <li>Identifica alumnos por DNI o nombre</li>
+        <li>Detecta la pestaña CIDI automáticamente</li>
+        <li>Soporta Evaluaciones 1-4, 5-8 y JIS</li>
+      </ul>
+    </div>
+    <div class="popup-wrap">
+      <div class="popup">
+        <div class="popup-header">
+          <h2>CIDI Auto-Notas</h2>
+          <p>Carga masiva de calificaciones en CIDI</p>
+        </div>
+        <div class="popup-body">
+          <div class="section">
+            <div class="section-title">Archivo de Calificaciones</div>
+            <div class="file-btn">Seleccionar archivo XLSX</div>
+            <div class="file-name">Calificaciones_6A_2026.xlsx — 13 materias</div>
+          </div>
+          <div class="section">
+            <div class="section-title">Seleccionar Materia</div>
+            <div class="select-box">Matematica (28 alumnos)</div>
+          </div>
+          <div class="section">
+            <div class="section-title">Pestaña CIDI <span class="badge-auto">AUTO</span></div>
+            <div class="check-group">
+              <div class="check-item checked"><input type="checkbox" checked disabled><label>Evaluaciones 1-4</label></div>
+              <div class="check-item"><input type="checkbox" disabled><label>Evaluaciones 5-8</label></div>
+              <div class="check-item"><input type="checkbox" disabled><label>JIS (Jornadas Intensivas)</label></div>
+            </div>
+            <div class="detection">Pestaña detectada: Evaluaciones 1-4</div>
+          </div>
+          <div class="section" style="margin-bottom:0">
+            <button class="btn-primary">Procesar Calificaciones</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

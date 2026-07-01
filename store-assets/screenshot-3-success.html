@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Screenshot 3</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    .steps {
+      display: grid;
+      gap: 14px;
+      max-width: 500px;
+    }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px 18px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step h3 {
+      font-size: 15px;
+      color: #2d3748;
+      margin-bottom: 4px;
+    }
+    .step p {
+      font-size: 13px;
+      color: #718096;
+      line-height: 1.45;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .summary-item {
+      text-align: center;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 10px 6px;
+    }
+    .summary-item .n { font-size: 20px; font-weight: 700; color: #667eea; }
+    .summary-item .l { font-size: 11px; color: #718096; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="side-panel">
+      <div class="badge">Flujo simple</div>
+      <h1>Tres pasos y <span>listo</span></h1>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Exportá el XLSX</h3>
+            <p>Desde tu sistema escolar (formato PHP 2026 o legacy con DNI).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Abrí CIDI en Chrome</h3>
+            <p>Ingresá a Registrar Notas y elegí la pestaña correspondiente.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Procesá con la extensión</h3>
+            <p>Seleccioná materia y presioná Procesar. Revisá el resumen al finalizar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup-wrap">
+      <div class="popup">
+        <div class="popup-header">
+          <h2>CIDI Auto-Notas</h2>
+          <p>Proceso completado</p>
+        </div>
+        <div class="popup-body">
+          <div class="section">
+            <div class="section-title">Materia: Matematica</div>
+            <div class="status success">
+              <strong>Completado.</strong> 26 calificaciones cargadas, 2 omitidas (sin nota), 0 errores.
+            </div>
+            <div class="summary-grid">
+              <div class="summary-item"><div class="n">26</div><div class="l">Cargadas</div></div>
+              <div class="summary-item"><div class="n">2</div><div class="l">Omitidas</div></div>
+              <div class="summary-item"><div class="n">3</div><div class="l">AUS→1</div></div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-title">Registro</div>
+            <div class="log-panel">
+              <div class="log-line ok">[14:33:45] Finalizado: 26/28 alumnos procesados</div>
+              <div class="log-line ok">[14:33:45] Sin errores de coincidencia DNI</div>
+              <div class="log-line">[14:33:45] Listo para otra materia</div>
+            </div>
+          </div>
+          <div class="section" style="margin-bottom:0">
+            <div class="status info">Cambiá la materia en el selector y procesá de nuevo sin recargar el archivo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

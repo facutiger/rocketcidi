@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Screenshot 2</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    .side-panel h1 { font-size: 38px; }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 8px;
+      max-width: 480px;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .stat-card .num {
+      font-size: 32px;
+      font-weight: 700;
+      color: #667eea;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-card .lbl {
+      font-size: 13px;
+      color: #718096;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="side-panel">
+      <div class="badge">En acción</div>
+      <h1>Procesamiento <span>automático</span></h1>
+      <p class="lead">La extensión completa los formularios de CIDI alumno por alumno, con barra de progreso y registro detallado.</p>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num">28</div><div class="lbl">Alumnos en la materia</div></div>
+        <div class="stat-card"><div class="num">72%</div><div class="lbl">Progreso actual</div></div>
+        <div class="stat-card"><div class="num">AUS→1</div><div class="lbl">Ausentes convertidos</div></div>
+        <div class="stat-card"><div class="num">Local</div><div class="lbl">Sin enviar datos externos</div></div>
+      </div>
+    </div>
+    <div class="popup-wrap">
+      <div class="popup">
+        <div class="popup-header">
+          <h2>CIDI Auto-Notas</h2>
+          <p>Procesando calificaciones...</p>
+        </div>
+        <div class="popup-body">
+          <div class="section">
+            <div class="section-title">Archivo de Calificaciones</div>
+            <div class="file-name" style="margin-top:0">Calificaciones_6A_2026.xlsx</div>
+          </div>
+          <div class="section">
+            <div class="section-title">Materia: Matematica</div>
+            <div class="detection" style="margin-top:0">Evaluaciones 1-4 · 20/28 alumnos</div>
+          </div>
+          <div class="section">
+            <button class="btn-primary disabled">Procesando...</button>
+            <div class="progress-wrap">
+              <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+              <div class="progress-text">72% — GARCIA, Maria (DNI 40123456)</div>
+            </div>
+          </div>
+          <div class="section" style="margin-bottom:0">
+            <div class="section-title">Registro</div>
+            <div class="log-panel">
+              <div class="log-line ok">[14:32:01] Nota cargada: LOPEZ, Juan — Eval 3 = 8</div>
+              <div class="log-line ok">[14:32:04] Nota cargada: MARTINEZ, Ana — Eval 3 = 7</div>
+              <div class="log-line warn">[14:32:06] AUS convertido a 1: PEREZ, Carlos</div>
+              <div class="log-line">[14:32:08] Procesando: GARCIA, Maria...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
