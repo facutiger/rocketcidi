@@ -1,4 +1,4 @@
-# 🚀 CIDI Auto-Notas v2.0
+# 🚀 CIDI Auto-Notas v2.0 (rocketcidi)
 
 Extensión de Chrome para automatizar la carga masiva de calificaciones en el sistema CIDI del Gobierno de Córdoba, Argentina.
 
